@@ -3,46 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfólio de Micaela</title>
+  <title>Portfólio Micaela</title>
+
+  <!-- Devicon (ícones das linguagens) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+<!-- Font Awesome CDN pública -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <!-- CSS -->
   <link rel="stylesheet" href="visual.css" />
 </head>
 <body>
-  <div class="container">
-    
-    <!-- LADO ESQUERDO - TEXTO -->
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#">Início</a></li>
+      <li><a href="#">Projetos</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container">
+    <!-- LADO ESQUERDO -->
     <div class="left-content">
-      <h2> Hello world. Sou Micaela</h2>
-      <h2 class="title">Desenvolvedora Back-End</h2>
-      <p class="typed-text">
-        Olá, sou Micaela | Desenvolvedora Back-End | Python, Java, Spring Boot, JavaScript, CSS, HTML
+     <h1 class="highlight">Hello World! Me chamo Micaela.</h1>
+      <h2>
+        Engenheira de Software
+        <span class="typed-text" id="typed-text"></span><span class="bar">|</span>
+      </h2>
+      <p class="bio">
+        Desenvolvedora Back-End apaixonada por transformar ideias em soluções. Trabalho com Java, Spring Boot, Python, JavaScript e mais!
       </p>
 
       <div class="btn-container">
-        <button class="btn">Baixar CV</button>
+        <button class="btn">Download CV</button>
         <button class="btn">Contato</button>
       </div>
 
+      <!-- ÍCONES SOCIAIS -->
       <div class="social-links">
-        <a href="https://github.com/seuusuario" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/seuusuario" target="_blank">LinkedIn</a>
+        <a href="https://github.com/seuusuario" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/seuusuario" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://wa.me/seunumero" target="_blank"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
 
-    <!-- LADO DIREITO - FOTO + CÍRCULO -->
+    <!-- LADO DIREITO - FOTO E ÍCONES -->
     <div class="right-content">
-      <div class="tech-circle">
-        <img src="micaela-removebg.png" alt="Foto de Micaela" class="profile-img" />
-        <div class="tech-icon">🐍</div>
-        <div class="tech-icon">☕</div>
-        <div class="tech-icon">🌱</div>
-        <div class="tech-icon">💻</div>
-        <div class="tech-icon">🎨</div>
-        <div class="tech-icon">🧱</div>
+      <!-- FOTO -->
+      <div class="circle-rotate">
+        <img src="micaela-removebg.png" alt="Micaela" class="profile-img" />
+      </div>
+
+      <!-- ÍCONES GIRANDO -->
+      <div class="orbit-ring">
+        <i class="devicon-python-plain colored"></i>
+        <i class="devicon-postgresql-plain colored"></i>
+        <i class="devicon-java-plain colored"></i>
+        <i class="devicon-html5-plain colored"></i>
+        <i class="devicon-css3-plain colored"></i>
+        <i class="devicon-javascript-plain colored"></i>
+        <i class="devicon-go-plain colored"></i>
+        <i class="devicon-spring-plain colored"></i>
       </div>
     </div>
+  </main>
 
-  </div>
+  <!-- EFEITO DE DIGITAÇÃO -->
+  <script>
+    const text = " • Desenvolvedora Back-End";
+    const typedText = document.getElementById("typed-text");
+    let index = 0;
 
-  <script src="script.js"></script>
+    function type() {
+      if (index < text.length) {
+        typedText.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, 100);
+      }
+    }
+
+    type();
+  </script>
 </body>
 </html>
