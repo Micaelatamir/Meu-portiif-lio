@@ -12,7 +12,7 @@
 
 
   <!-- CSS -->
-  <link rel="stylesheet" href="visual.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -59,34 +59,21 @@
       </div>
 
       <!-- ÍCONES GIRANDO -->
-      <div class="orbit-ring">
-        <i class="devicon-python-plain colored"></i>
-        <i class="devicon-postgresql-plain colored"></i>
-        <i class="devicon-java-plain colored"></i>
-        <i class="devicon-html5-plain colored"></i>
-        <i class="devicon-css3-plain colored"></i>
-        <i class="devicon-javascript-plain colored"></i>
-        <i class="devicon-go-plain colored"></i>
-        <i class="devicon-spring-plain colored"></i>
-      </div>
+    <!-- ÍCONES GIRANDO EM CÍRCULO -->
+<div class="orbit-ring">
+  <div class="orbit-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div>
+  <div class="orbit-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="Go"></div>
+  <div class="orbit-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
+  <div class="orbit-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></div>
+  <div class="orbit-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
+  <div class="orbit-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"></div>
+  <div class="orbit-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring"></div>
+  <div class="orbit-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"></div>
+</div>
+
     </div>
   </main>
 
-  <!-- EFEITO DE DIGITAÇÃO -->
-  <script>
-    const text = " • Desenvolvedora Back-End";
-    const typedText = document.getElementById("typed-text");
-    let index = 0;
-
-    function type() {
-      if (index < text.length) {
-        typedText.textContent += text.charAt(index);
-        index++;
-        setTimeout(type, 100);
-      }
-    }
-
-    type();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

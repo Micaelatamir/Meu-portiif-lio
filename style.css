@@ -180,28 +180,38 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: rotate-ring 30s linear infinite;
-  z-index: 2;
+  animation: rotate-ring 25s linear infinite;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.orbit-ring i {
+.orbit-icon {
   position: absolute;
-  font-size: 26px;
+  width: 50px;
+  height: 50px;
   background-color: #1e1a2b;
   border-radius: 50%;
-  padding: 14px;
-  box-shadow: 0 0 8px rgba(160, 100, 243, 0.5);
+  border: 2px solid #a064f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(160, 100, 243, 0.4);
+}
+.orbit-icon img {
+  width: 26px;
+  height: 26px;
 }
 
-/* POSIÇÕES DOS ÍCONES */
-.orbit-ring i:nth-child(1) { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-.orbit-ring i:nth-child(2) { top: 20%; left: 85%; transform: translate(-50%, -50%); }
-.orbit-ring i:nth-child(3) { top: 50%; left: 100%; transform: translate(-50%, -50%); }
-.orbit-ring i:nth-child(4) { top: 85%; left: 80%; transform: translate(-50%, -50%); }
-.orbit-ring i:nth-child(5) { top: 100%; left: 50%; transform: translate(-50%, -50%); }
-.orbit-ring i:nth-child(6) { top: 80%; left: 10%; transform: translate(-50%, -50%); }
-.orbit-ring i:nth-child(7) { top: 50%; left: 0%; transform: translate(-50%, -50%); }
-.orbit-ring i:nth-child(8) { top: 20%; left: 10%; transform: translate(-50%, -50%); }
+
+/* Distribuição circular dos ícones */
+.orbit-icon:nth-child(1) { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+.orbit-icon:nth-child(2) { top: 18%; left: 82%; transform: translate(-50%, -50%); }
+.orbit-icon:nth-child(3) { top: 50%; left: 100%; transform: translate(-50%, -50%); }
+.orbit-icon:nth-child(4) { top: 82%; left: 82%; transform: translate(-50%, -50%); }
+.orbit-icon:nth-child(5) { top: 100%; left: 50%; transform: translate(-50%, -50%); }
+.orbit-icon:nth-child(6) { top: 82%; left: 18%; transform: translate(-50%, -50%); }
+.orbit-icon:nth-child(7) { top: 50%; left: 0%; transform: translate(-50%, -50%); }
+.orbit-icon:nth-child(8) { top: 18%; left: 18%; transform: translate(-50%, -50%); }
 
 @keyframes rotate-ring {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
