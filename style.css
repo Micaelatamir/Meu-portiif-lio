@@ -234,3 +234,79 @@ body {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
+
+.sobre {
+  padding: 60px 20px;
+  background-color: #0f0e17;
+  color: #fff;
+  text-align: center;
+}
+
+.titulo {
+  font-size: 32px;
+  color: #a064f3; /* roxo */
+  margin-bottom: 30px;
+}
+
+.cards-sobre {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.card {
+  background-color: #1a1826;
+  border: 1px solid #a064f3;
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(160, 100, 243, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(160, 100, 243, 0.4);
+}
+
+.card h3 {
+  color: #a064f3;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.card p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.habilidades {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.habilidades h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.habilidades-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.habilidades-grid .icon img {
+  width: 60px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.habilidades-grid .icon img:hover {
+  transform: scale(1.2);
+}
