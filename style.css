@@ -103,21 +103,38 @@ body {
 
 /* BOTÕES */
 .btn-container {
+  display: flex;
+  gap: 15px;
   margin-top: 20px;
 }
-
 .btn {
-  background-color: #a064f3;
-  color: white;
-  padding: 12px 20px;
+  padding: 12px 24px;
+  font-size: 16px;
   border: none;
-  border-radius: 5px;
-  margin-right: 10px;
+  border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
 }
 
+.btn-primary {
+  background-color: #5e2b97; /* azul */
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #5e2b97;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid #692bb1;
+  color: #5e2b97;
+}
+
+.btn-secondary:hover {
+  color: #fff;
+}
 .btn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 10px #cfa9ff;
