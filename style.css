@@ -220,15 +220,14 @@ body {
 }
 
 
-/* Distribuição circular dos ícones */
-.orbit-icon:nth-child(1) { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-.orbit-icon:nth-child(2) { top: 18%; left: 82%; transform: translate(-50%, -50%); }
-.orbit-icon:nth-child(3) { top: 50%; left: 100%; transform: translate(-50%, -50%); }
-.orbit-icon:nth-child(4) { top: 82%; left: 82%; transform: translate(-50%, -50%); }
-.orbit-icon:nth-child(5) { top: 100%; left: 50%; transform: translate(-50%, -50%); }
-.orbit-icon:nth-child(6) { top: 82%; left: 18%; transform: translate(-50%, -50%); }
-.orbit-icon:nth-child(7) { top: 50%; left: 0%; transform: translate(-50%, -50%); }
-.orbit-icon:nth-child(8) { top: 18%; left: 18%; transform: translate(-50%, -50%); }
+/* Ícones distribuídos igualmente (6 posições em círculo perfeito) */
+.orbit-icon:nth-child(1) { top: 0%; left: 50%; transform: translate(-50%, -50%); }     /* topo */
+.orbit-icon:nth-child(2) { top: 25%; left: 93%; transform: translate(-50%, -50%); }    /* topo-direita */
+.orbit-icon:nth-child(3) { top: 75%; left: 93%; transform: translate(-50%, -50%); }    /* baixo-direita */
+.orbit-icon:nth-child(4) { top: 100%; left: 50%; transform: translate(-50%, -50%); }   /* baixo */
+.orbit-icon:nth-child(5) { top: 75%; left: 7%; transform: translate(-50%, -50%); }     /* baixo-esquerda */
+.orbit-icon:nth-child(6) { top: 25%; left: 7%; transform: translate(-50%, -50%); }     /* topo-esquerda */
+
 
 @keyframes rotate-ring {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
