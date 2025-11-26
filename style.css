@@ -10,7 +10,6 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family: "Inter", Arial, sans-serif;
-  /* Fundo principal com gradiente roxo e escuro */
   background: linear-gradient(120deg,var(--bg-1) 10%, rgba(36,19,59,0.9) 60%);
   color:#fff;
   -webkit-font-smoothing:antialiased;
@@ -38,7 +37,6 @@ body{
   font-size:0.9rem;
 }
 
-/* ====== HERO SECTION ====== */
 /* hero layout */
 .hero{
   display:flex;
@@ -145,36 +143,27 @@ body{
   padding: 5rem 5%;
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center; /* Centraliza o título e o bloco de conteúdo */
-}
+  text-align: center;}
 
 .about-content {
-  /* Largura será determinada pela seção pai (1200px) */
-  max-width: 1000px; /* Um pequeno limite para o bloco de texto ficar elegante */
+  max-width: 1000px; 
   margin: 0 auto;
 }
 
 .about-text {
-  /* Garante que o div de texto ocupe a largura máxima definida acima */
   width: 100%; 
 }
 
-/* Estilo do parágrafo da seção Sobre Mim - REGRAS CONSOLIDADAS E FINAIS */
 .about-text p {
   margin-bottom: 1.5rem;
   font-size: 1.15rem; 
   line-height: 1.8;
   color: var(--muted); 
-  text-align: center; /* Permite que o texto se estenda e centraliza suas linhas */
-  max-width: 100%; /* Ocupa o about-content width */
+  text-align: center;
+  max-width: 100%; 
   margin: 1.5rem auto; 
 }
 
-/* Regras duplicadas e conflitantes foram removidas daqui */
-
-/* ====== SEÇÃO SKILLS (#skills) ====== */
-
-/* ===================== NOVO ESTILO DE TÍTULO (Card com Linhas) ===================== */
 
 /* Container para o Título e Linhas */
 .section-title-wrapper {
