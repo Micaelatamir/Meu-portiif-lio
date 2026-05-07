@@ -1,128 +1,568 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfólio - Micaela Tamires</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Micaela Tamires — Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07090D;
+  --surface:  #0C1018;
+  --card:     #111820;
+  --card-hov: #151E28;
+  --mint:     #5CF0C0;
+  --mint-lo:  rgba(92,240,192,0.10);
+  --mint-bd:  rgba(92,240,192,0.18);
+  --text:     #C8D4DE;
+  --bright:   #EBF0F5;
+  --muted:    #526070;
+  --border:   rgba(255,255,255,0.06);
+  --border2:  rgba(255,255,255,0.10);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--mint-bd);border-radius:2px}
+
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora-blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.11}
+.ab1{width:600px;height:600px;background:#5CF0C0;top:-150px;left:-100px;animation:drift 18s ease-in-out infinite alternate}
+.ab2{width:500px;height:500px;background:#4A90D9;bottom:-100px;right:-80px;animation:drift 22s ease-in-out infinite alternate-reverse}
+.ab3{width:350px;height:350px;background:#A78BFA;top:40%;left:55%;animation:drift 15s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,30px) scale(1.08)}}
+
+.grain{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size:300px;opacity:0.03;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 7%;
+  backdrop-filter:blur(20px);
+  background:rgba(7,9,13,0.55);
+  border-bottom:1px solid var(--border);
+}
+.nav-name{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;
+  color:var(--bright);letter-spacing:0.02em;text-decoration:none;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:0.82rem;
+  letter-spacing:0.09em;text-transform:uppercase;transition:color .25s;
+}
+.nav-links a:hover{color:var(--mint)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:0.45rem;
+  border:1px solid var(--border2);color:var(--text);
+  font-family:'Syne',sans-serif;font-weight:600;font-size:0.78rem;
+  letter-spacing:0.03em;padding:0.5rem 1.2rem;border-radius:5px;
+  text-decoration:none;transition:all .25s;
+}
+.nav-cta:hover{border-color:var(--mint-bd);color:var(--mint);background:var(--mint-lo)}
+
+/* HERO */
+#hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 7% 5rem;
+}
+.hero-side-label{
+  position:absolute;top:50%;right:6%;transform:translateY(-50%);
+  writing-mode:vertical-rl;
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+  letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-side-label::before{content:'';display:block;width:1px;height:70px;background:var(--border2)}
+
+.hero-index{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+  color:var(--muted);letter-spacing:0.12em;margin-bottom:1.5rem;
+  opacity:0;animation:fadeup .8s .2s forwards;
+}
+.hero-display{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(3.8rem,9vw,8rem);
+  line-height:0.92;letter-spacing:-0.04em;color:var(--bright);
+  opacity:0;animation:fadeup .9s .35s forwards;
+}
+.hero-display em{
+  font-style:normal;color:transparent;
+  -webkit-text-stroke:1.5px rgba(92,240,192,0.45);
+}
+.hero-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-top:3rem;flex-wrap:wrap;gap:2rem;
+  opacity:0;animation:fadeup .9s .55s forwards;
+}
+.hero-desc{
+  max-width:460px;color:var(--muted);font-size:0.95rem;line-height:1.8;
+}
+.hero-desc strong{color:var(--text);font-weight:400}
+.hero-actions{display:flex;align-items:center;gap:1rem;flex-shrink:0}
+.btn-fill{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--mint);color:#070A0E;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.84rem;
+  padding:0.8rem 2rem;border-radius:5px;text-decoration:none;
+  letter-spacing:0.01em;transition:all .25s;
+}
+.btn-fill:hover{background:#fff;transform:translateY(-2px);box-shadow:0 10px 30px rgba(92,240,192,0.15)}
+.btn-line{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  color:var(--text);border:1px solid var(--border2);
+  font-family:'Syne',sans-serif;font-weight:600;font-size:0.84rem;
+  padding:0.8rem 2rem;border-radius:5px;text-decoration:none;transition:all .25s;
+}
+.btn-line:hover{border-color:var(--mint-bd);color:var(--mint);background:var(--mint-lo);transform:translateY(-2px)}
+.hero-divider{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--border)}
+
+@keyframes fadeup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* STRIP */
+.avail-strip{
+  position:relative;z-index:1;
+  border-bottom:1px solid var(--border);
+  padding:1rem 7%;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.avail-tag{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+  color:var(--mint);letter-spacing:0.08em;
+}
+.avail-dot{width:6px;height:6px;border-radius:50%;background:var(--mint);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+.strip-skills{display:flex;gap:1.5rem;list-style:none}
+.strip-skills li{font-size:0.76rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+
+/* SECTIONS */
+.s{position:relative;z-index:1;padding:7rem 7%;max-width:1300px;margin:0 auto}
+
+.sec-label{
+  display:flex;align-items:center;gap:0.75rem;
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+  color:var(--mint);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;
+}
+.sec-label::before{content:'';width:28px;height:1px;background:var(--mint-bd)}
+.sec-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2rem,3.5vw,2.8rem);color:var(--bright);
+  letter-spacing:-0.03em;line-height:1.1;margin-bottom:0.5rem;
+}
+
+/* ABOUT */
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;margin-top:4rem}
+.about-highlight{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;
+  color:var(--bright);line-height:1.4;margin-bottom:2rem;
+  padding-left:1rem;border-left:2px solid var(--mint);
+}
+.about-text p{color:var(--muted);font-size:0.97rem;line-height:1.85;margin-bottom:1.4rem}
+.about-text strong{color:var(--text);font-weight:400}
+
+.now-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.5rem}
+.now-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center}
+.now-header span{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--mint);letter-spacing:0.1em}
+.now-list{padding:1rem 1.25rem;display:flex;flex-direction:column;gap:0.75rem}
+.now-item{display:flex;align-items:flex-start;gap:0.75rem;font-size:0.87rem;color:var(--muted)}
+.now-item::before{content:'—';color:var(--mint-bd);font-size:0.75rem;margin-top:.2rem;flex-shrink:0}
+
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem;transition:border-color .25s,transform .25s}
+.stat-box:hover{border-color:var(--mint-bd);transform:translateY(-3px)}
+.stat-n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.9rem;color:var(--mint);line-height:1;margin-bottom:.3rem}
+.stat-l{font-size:0.75rem;color:var(--muted)}
+
+/* SKILLS */
+.skills-layout{margin-top:3.5rem}
+.skill-group{margin-bottom:2.5rem}
+.skill-group-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+  color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;
+  margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);
+}
+.skill-row{display:flex;flex-wrap:wrap;gap:0.6rem}
+.skill-pill{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:7px;padding:0.65rem 1rem;transition:all .25s;cursor:default;
+}
+.skill-pill:hover{border-color:var(--c,var(--mint-bd));background:var(--card-hov);transform:translateY(-2px)}
+.skill-pill img{width:18px;height:18px;object-fit:contain}
+.skill-pill span{font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text)}
+
+/* PROJECTS */
+.projects-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.view-all{
+  font-family:'JetBrains Mono',monospace;font-size:0.75rem;
+  color:var(--muted);text-decoration:none;letter-spacing:0.08em;
+  transition:color .2s;display:flex;align-items:center;gap:0.4rem;
+}
+.view-all:hover{color:var(--mint)}
+
+.proj-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1px;border:1px solid var(--border);border-radius:12px;overflow:hidden;
+}
+.proj-card{
+  background:var(--card);padding:2rem;
+  display:flex;flex-direction:column;gap:1rem;
+  border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+  transition:background .25s;position:relative;overflow:hidden;text-decoration:none;
+}
+.proj-card:hover{background:var(--card-hov)}
+.proj-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--mint);transform:scaleX(0);transform-origin:left;transition:transform .35s ease;
+}
+.proj-card:hover::after{transform:scaleX(1)}
+.proj-num{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--muted);letter-spacing:.1em}
+.proj-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--bright);letter-spacing:-0.01em;line-height:1.3}
+.proj-desc{font-size:0.85rem;color:var(--muted);line-height:1.7;flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.ptag{
+  font-family:'JetBrains Mono',monospace;font-size:0.67rem;
+  padding:0.2rem 0.55rem;border-radius:3px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted);
+}
+.ptag.h{color:var(--mint);border-color:var(--mint-bd);background:var(--mint-lo)}
+.proj-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.25rem}
+.proj-lang{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted)}
+.ldot{width:7px;height:7px;border-radius:50%;background:#F89820}
+.proj-arrow{font-size:.9rem;color:var(--muted);transition:color .2s,transform .2s}
+.proj-card:hover .proj-arrow{color:var(--mint);transform:translate(3px,-3px)}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:6rem;align-items:start;margin-top:4rem}
+.contact-intro h3{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.3rem;
+  color:var(--bright);margin-bottom:1rem;letter-spacing:-0.02em;
+}
+.contact-intro p{color:var(--muted);font-size:0.95rem;line-height:1.8;margin-bottom:2rem}
+.contact-links{display:flex;flex-direction:column;gap:.6rem}
+.clink{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;background:var(--card);
+  border:1px solid var(--border);border-radius:8px;text-decoration:none;transition:all .25s;
+}
+.clink:hover{border-color:var(--mint-bd);background:var(--card-hov);transform:translateX(5px)}
+.clink-icon{
+  width:34px;height:34px;border-radius:7px;
+  background:var(--mint-lo);border:1px solid var(--mint-bd);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.clink-info strong{display:block;font-family:'Syne',sans-serif;font-size:.83rem;font-weight:600;color:var(--bright)}
+.clink-info span{font-size:.78rem;color:var(--muted)}
+
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2.5rem;text-align:center}
+.c-avatar{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 1.25rem;
+  background:linear-gradient(135deg,#3DDDB8 0%,#6EA8FE 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:#07090D;
+}
+.contact-card h4{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:var(--bright);margin-bottom:.3rem}
+.contact-card p{color:var(--muted);font-size:.83rem;margin-bottom:1.5rem}
+.open-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(92,240,192,0.08);border:1px solid var(--mint-bd);
+  color:var(--mint);font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;letter-spacing:.06em;padding:.35rem .9rem;
+  border-radius:100px;margin-bottom:1.75rem;
+}
+.open-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--mint);animation:pulse 2s infinite}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;padding:2rem 7%;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+footer p{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted)}
+footer span{color:var(--mint)}
+.footer-quote{font-size:.72rem;color:var(--muted);font-style:italic;font-family:'DM Sans',sans-serif}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-side-label{display:none}
+  .about-layout,.contact-layout{grid-template-columns:1fr;gap:3rem}
+  nav{padding:1rem 5%}
+  .nav-links{display:none}
+  .s{padding:5rem 5%}
+  #hero{padding:0 5% 4rem}
+  .avail-strip{padding:.75rem 5%}
+  .strip-skills{display:none}
+}
+</style>
 </head>
 <body>
-  <header class="nav">
-    <div class="brand">Micaela Tamires</div>
-    <nav class="menu">
-      <a href="#about">SOBRE</a>
-      <a href="#projects">PROJETOS</a>
-      <a href="#experience">EXPERIÊNCIA</a>
-      <a href="#skills">SKILLS</a>
-      <a href="#education">FORMAÇÃO</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-left">
-        <p class="intro-small">Olá,</p>
-        <h1 class="intro-main">Me Chamo <span class="accent">Micaela Tamires!</span></h1>
-        <p class="subtitle">Backend Developer · APIs · Dados · SQL</p>
+<div class="aurora">
+  <div class="aurora-blob ab1"></div>
+  <div class="aurora-blob ab2"></div>
+  <div class="aurora-blob ab3"></div>
+</div>
+<div class="grain"></div>
 
-        <div class="hero-actions">
-          <a class="btn btn-outline" href="+5511958271937">Contato</a>
-          <a class="btn btn-primary" href="Curriculo.pdf" download>Currículo</a>
-        </div>
+<nav>
+  <a href="#hero" class="nav-name">Micaela Tamires</a>
+  <ul class="nav-links">
+    <li><a href="#about">sobre</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projetos</a></li>
+    <li><a href="#contact">contato</a></li>
+  </ul>
+  <a href="Curriculo.pdf" class="nav-cta">Curriculo</a>
+</nav>
 
-        <div class="socials">
-          <a href="#" aria-label="GitHub">gt</a>
-          <a href="#" aria-label="LinkedIn">IN</a>
-          <a href="#" aria-label="Instagram">IG</a>
+<section id="hero">
+  <div class="hero-side-label">Backend Developer</div>
+  <div class="hero-index">01 &mdash; apresentacao</div>
+  <h1 class="hero-display">Micaela<br><em>Tamires.</em></h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      Desenvolvedora backend com foco em <strong>Java e Spring Boot</strong>,
+      construindo APIs REST solidas e trabalhando com bancos de dados relacionais.
+      Em busca da primeira oportunidade para contribuir e crescer em um time real.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-fill">Ver projetos</a>
+      <a href="#contact" class="btn-line">Falar comigo</a>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+</section>
+
+<div class="avail-strip">
+  <div class="avail-tag"><span class="avail-dot"></span>disponivel para oportunidades</div>
+  <ul class="strip-skills">
+    <li>Java</li><li>Spring Boot</li><li>PostgreSQL</li><li>MySQL</li><li>Git</li>
+  </ul>
+</div>
+
+<!-- ABOUT -->
+<section class="s" id="about">
+  <div class="reveal">
+    <div class="sec-label">sobre mim</div>
+    <h2 class="sec-title">Quem sou eu?</h2>
+  </div>
+  <div class="about-layout">
+    <div class="reveal" style="transition-delay:.05s">
+      <p class="about-highlight">Desenvolvedora focada em backend, apaixonada por codigo limpo e solucoes bem arquitetadas.</p>
+      <div class="about-text">
+        <p>Me chamo <strong>Micaela Tamires</strong> e tenho experiencia na construcao de APIs REST com <strong>Java e Spring Boot</strong>, com organizacao em arquitetura em camadas e atencao as boas praticas de engenharia de software.</p>
+        <p>Trabalho com modelagem de bancos de dados relacionais — <strong>PostgreSQL</strong> e <strong>MySQL</strong> — com foco na clareza das relacoes entre entidades. Estou evoluindo em <strong>Cloud Computing com AWS</strong> para pensar em sistemas escaláveis.</p>
+        <p>Tenho facilidade em aprender, gosto de resolver problemas reais e estou em busca da primeira oportunidade como desenvolvedora — pronta para crescer rapido e contribuir desde o primeiro dia.</p>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="now-card">
+        <div class="now-header"><span>// atualmente</span></div>
+        <div class="now-list">
+          <div class="now-item">Estudando AWS para cloud e arquitetura de sistemas</div>
+          <div class="now-item">Aprofundando Clean Architecture em projetos Java</div>
+          <div class="now-item">Explorando Docker e containerizacao</div>
+          <div class="now-item">Cursando Engenharia de Software</div>
         </div>
       </div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-n">5+</div><div class="stat-l">projetos publicados</div></div>
+        <div class="stat-box"><div class="stat-n">4</div><div class="stat-l">tecnologias backend</div></div>
+        <div class="stat-box"><div class="stat-n">Java</div><div class="stat-l">linguagem principal</div></div>
+        <div class="stat-box"><div class="stat-n">Open</div><div class="stat-l">a oportunidades</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="hero-right">
-        <div class="code-card">
-          <div class="code-header">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
+<!-- SKILLS -->
+<section class="s" id="skills" style="padding-top:0">
+  <div class="reveal">
+    <div class="sec-label">tecnologias</div>
+    <h2 class="sec-title">Stack</h2>
+  </div>
+  <div class="skills-layout reveal" style="transition-delay:.1s">
+    <div class="skill-group">
+      <div class="skill-group-label">Backend</div>
+      <div class="skill-row">
+        <div class="skill-pill" style="--c:rgba(248,152,32,.35)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt=""><span>Java</span></div>
+        <div class="skill-pill" style="--c:rgba(109,179,63,.35)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt=""><span>Spring Boot</span></div>
+        <div class="skill-pill"><span style="font-size:.75rem;font-family:'JetBrains Mono',monospace">REST APIs</span></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Banco de Dados</div>
+      <div class="skill-row">
+        <div class="skill-pill" style="--c:rgba(65,130,195,.35)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt=""><span>PostgreSQL</span></div>
+        <div class="skill-pill" style="--c:rgba(0,172,209,.35)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt=""><span>MySQL</span></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Ferramentas</div>
+      <div class="skill-row">
+        <div class="skill-pill" style="--c:rgba(240,80,50,.35)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt=""><span>Git</span></div>
+        <div class="skill-pill" style="--c:rgba(36,150,237,.35)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt=""><span>Docker</span></div>
+        <div class="skill-pill"><span style="font-size:.75rem;font-family:'JetBrains Mono',monospace">Postman</span></div>
+        <div class="skill-pill"><span style="font-size:.75rem;font-family:'JetBrains Mono',monospace">GitHub</span></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Aprendendo</div>
+      <div class="skill-row">
+        <div class="skill-pill" style="--c:rgba(255,153,0,.3)"><span style="font-size:.75rem;font-family:'JetBrains Mono',monospace;color:var(--mint)">AWS</span></div>
+        <div class="skill-pill"><span style="font-size:.75rem;font-family:'JetBrains Mono',monospace">Clean Architecture</span></div>
+        <div class="skill-pill"><span style="font-size:.75rem;font-family:'JetBrains Mono',monospace">JWT / Spring Security</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="s" id="projects" style="padding-top:0">
+  <div class="projects-header reveal">
+    <div>
+      <div class="sec-label">projetos</div>
+      <h2 class="sec-title">O que construi</h2>
+    </div>
+    <a href="https://github.com/Micaelatamir" target="_blank" class="view-all">Ver tudo no GitHub &rarr;</a>
+  </div>
+  <div class="proj-grid reveal" style="transition-delay:.1s">
+
+    <a class="proj-card" href="https://github.com/Micaelatamir/order-management-api" target="_blank">
+      <div class="proj-num">001</div>
+      <div class="proj-title">Order Management API</div>
+      <p class="proj-desc">Sistema de gerenciamento de pedidos com relacionamento entre usuarios, produtos e itens. Arquitetura em camadas, focada em escalabilidade.</p>
+      <div class="proj-tags"><span class="ptag h">REST API</span><span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">PostgreSQL</span></div>
+      <div class="proj-foot"><div class="proj-lang"><span class="ldot"></span> Java</div><span class="proj-arrow">&nearr;</span></div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/Micaelatamir/sistema-controle-despesas-com-login" target="_blank">
+      <div class="proj-num">002</div>
+      <div class="proj-title">Sistema de Controle de Despesas</div>
+      <p class="proj-desc">Controle financeiro com autenticacao e login integrados. Despesas organizadas por usuario com seguranca na camada de acesso.</p>
+      <div class="proj-tags"><span class="ptag h">Spring Security</span><span class="ptag">Java</span><span class="ptag">MySQL</span></div>
+      <div class="proj-foot"><div class="proj-lang"><span class="ldot"></span> Java</div><span class="proj-arrow">&nearr;</span></div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/Micaelatamir/Gerador-de-senhas-seguras-com-regras-customizaveis" target="_blank">
+      <div class="proj-num">003</div>
+      <div class="proj-title">Gerador de Senhas Seguras</div>
+      <p class="proj-desc">Gerador de senhas com regras customizaveis — comprimento, caracteres especiais, numeros e letras. Direto e funcional.</p>
+      <div class="proj-tags"><span class="ptag h">Security</span><span class="ptag">Java</span></div>
+      <div class="proj-foot"><div class="proj-lang"><span class="ldot"></span> Java</div><span class="proj-arrow">&nearr;</span></div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/Micaelatamir/internal-ai-chat" target="_blank">
+      <div class="proj-num">004</div>
+      <div class="proj-title">Internal AI Chat</div>
+      <p class="proj-desc">Chat interno com integracao de inteligencia artificial. Demonstra a conexao entre backend Java e servicos externos de IA via API.</p>
+      <div class="proj-tags"><span class="ptag h">AI Integration</span><span class="ptag">Java</span><span class="ptag">Spring Boot</span></div>
+      <div class="proj-foot"><div class="proj-lang"><span class="ldot"></span> Java</div><span class="proj-arrow">&nearr;</span></div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/Micaelatamir/Sistema-de-Login-com-Senha-Criptografada" target="_blank">
+      <div class="proj-num">005</div>
+      <div class="proj-title">Login com Senha Criptografada</div>
+      <p class="proj-desc">Sistema de autenticacao com senhas criptografadas via BCrypt. Implementacao segura com boas praticas de seguranca de dados.</p>
+      <div class="proj-tags"><span class="ptag h">BCrypt</span><span class="ptag">Java</span><span class="ptag">Auth</span></div>
+      <div class="proj-foot"><div class="proj-lang"><span class="ldot"></span> Java</div><span class="proj-arrow">&nearr;</span></div>
+    </a>
+
+    <div class="proj-card" style="opacity:.4;cursor:default;border-style:dashed">
+      <div class="proj-num">em breve</div>
+      <div class="proj-title" style="color:var(--muted)">Proximo projeto</div>
+      <p class="proj-desc">JWT + Clean Architecture + AWS. Em desenvolvimento.</p>
+      <div class="proj-tags"><span class="ptag">JWT</span><span class="ptag">AWS</span><span class="ptag">Docker</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="s" id="contact" style="padding-bottom:8rem">
+  <div class="reveal">
+    <div class="sec-label">contato</div>
+    <h2 class="sec-title">Vamos conversar?</h2>
+  </div>
+  <div class="contact-layout">
+    <div class="reveal" style="transition-delay:.1s">
+      <div class="contact-intro">
+        <h3>Aberta a oportunidades</h3>
+        <p>Estou em busca da minha primeira oportunidade como desenvolvedora backend. Se voce tem um time ou projeto desafiador, adoraria uma conversa.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:micaela.tamir@gmail.com" class="clink">
+          <div class="clink-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="1.8" width="15" height="15"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
-
-         <pre class="code" id="codeBlock">
-         class Developer {
-
-         String nome = "Micaela Tamires";
-         String[] backend = { "Java", "Spring Boot" };
-
-         String[] databases = { "PostgreSQL", "MySQL" };
-
-         String[] tools = { "Git" };
-
-         String lookingFor = "Backend opportunities";
-
-      }
-          </pre>
-
-        </div>
+          <div class="clink-info"><strong>Email</strong><span>micaela.tamir@gmail.com</span></div>
+        </a>
+        <a href="https://www.linkedin.com/in/micaela-tamires-aa320b312/" target="_blank" class="clink">
+          <div class="clink-icon">
+            <svg viewBox="0 0 24 24" fill="var(--mint)" width="15" height="15"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div class="clink-info"><strong>LinkedIn</strong><span>micaela-tamires</span></div>
+        </a>
+        <a href="https://github.com/Micaelatamir" target="_blank" class="clink">
+          <div class="clink-icon">
+            <svg viewBox="0 0 24 24" fill="var(--mint)" width="15" height="15"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <div class="clink-info"><strong>GitHub</strong><span>Micaelatamir</span></div>
+        </a>
+        <a href="https://wa.me/5511958271937" target="_blank" class="clink">
+          <div class="clink-icon">
+            <svg viewBox="0 0 24 24" fill="var(--mint)" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.508 5.844L0 24l6.335-1.508A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.37l-.358-.213-3.762.895.912-3.665-.233-.377A9.789 9.789 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+          </div>
+          <div class="clink-info"><strong>WhatsApp</strong><span>+55 11 95827-1937</span></div>
+        </a>
       </div>
-      
-    </section>
-    
-    <section id="about" class="about">
-      <h2 class="section-title">QUEM SOU EU?</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>
-            Me chamo Micaela Tamires e estou focada em desenvolvimento backend com Java e Spring Boot, criando APIs REST e trabalhando com bancos de dados relacionais como PostgreSQL e MySQL.
-
-            Também estou estudando AWS para evoluir minha visão em cloud e arquitetura de sistemas, buscando me preparar para os desafios reais do mercado.
-
-            Tenho facilidade em aprender, gosto de resolver problemas e estou constantemente evoluindo minhas habilidades através de projetos práticos. Estou em busca da minha primeira oportunidade como desenvolvedora, pronta para crescer rápido e gerar valor desde o início.          </p>
-         
-        </div>
+    </div>
+    <div class="reveal" style="transition-delay:.25s">
+      <div class="contact-card">
+        <div class="c-avatar">MT</div>
+        <h4>Micaela Tamires</h4>
+        <p>Backend Developer &middot; Engenharia de Software</p>
+        <div class="open-badge">aberta a oportunidades</div>
+        <a href="Curriculo.pdf" class="btn-fill" style="width:100%;justify-content:center">Baixar Curriculo</a>
       </div>
-    </section>
-    
-    <section id="skills" class="skills center">
-        <div class="section-title-wrapper">
-            <div class="line"></div>
-            <h2 class="section-title">Skills</h2>
-            <div class="line"></div>
-        </div>
+    </div>
+  </div>
+</section>
 
-        <div class="skills-grid">
+<footer>
+  <p>Micaela Tamires &mdash; <span>Backend Developer</span> &mdash; 2025</p>
+  <p class="footer-quote">"Codigo e poesia. E eu to escrevendo a minha historia linha por linha."</p>
+</footer>
 
-            <div class="skill-card">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
-                <p>Git</p>
-            </div>
-
-            <div class="skill-card">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
-                <p>Java</p>
-            </div>
-
-            <div class="skill-card">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
-                <p>MySQL</p>
-            </div>
-            
-            <div class="skill-card">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
-                <p>PostgreSQL</p>
-            </div>
-
-            <div class="skill-card">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot">
-                <p>Spring Boot</p>
-            </div>
-
-        </div>
-    </section>
-    
-  </main>
-
-  <footer class="footer">
-    © <span id="year"></span> Micaela Tamires — Backend Developer
-  </footer>
-
-  <script src="script.js"></script>
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
